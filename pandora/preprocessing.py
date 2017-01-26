@@ -10,7 +10,7 @@ from sklearn.feature_extraction import DictVectorizer
 from keras.utils import np_utils
 import numpy as np
 
-from model import build_model
+from pandora.model import build_model
 
 def index_characters(tokens, focus_repr='recurrent', v2u=False):
     if v2u:

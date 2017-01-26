@@ -3,3 +3,5 @@ gensim
 sklearn
 numpy
 keras
+h5py
+tensorflow

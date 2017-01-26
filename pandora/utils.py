@@ -6,7 +6,7 @@ from __future__ import print_function
 import os
 import codecs
 import re
-import ConfigParser
+import configparser as ConfigParser
 
 def load_annotated_dir(directory='directory', format='.tab', extension='.txt', nb_instances=None,
                         include_lemma=True, include_morph=True, include_pos=True):

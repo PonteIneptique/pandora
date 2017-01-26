@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
-import cPickle as pickle
+import pickle
 import os
 import codecs
 import shutil
@@ -22,11 +22,11 @@ from keras.models import model_from_json
 
 import editdistance
 
-import utils
-import evaluation
-from model import build_model
-from preprocessing import Preprocessor
-from pretraining import Pretrainer
+import pandora.utils as utils
+import pandora.evaluation as evaluation
+from pandora.model import build_model
+from pandora.preprocessing import Preprocessor
+from pandora.pretraining import Pretrainer
 
 class Tagger():
 
@@ -404,7 +404,7 @@ class Tagger():
         # save architecture:
         json_string = self.model.to_json()
         with open(os.sep.join((self.model_dir, 'model_architecture.json')), 'wb') as f:
-            f.write(json_string)
+            f.write(json_string.encode())
         # save weights:
         self.model.save_weights(os.sep.join((self.model_dir, 'model_weights.hdf5')), \
                 overwrite=True)
