@@ -19,6 +19,7 @@ from sklearn.manifold import TSNE
 
 from keras.utils import np_utils
 from keras.models import model_from_json
+from keras import backend as K
 
 import editdistance
 
@@ -406,8 +407,7 @@ class Tagger():
         with open(os.sep.join((self.model_dir, 'model_architecture.json')), 'wb') as f:
             f.write(json_string.encode())
         # save weights:
-        self.model.save_weights(os.sep.join((self.model_dir, 'model_weights.hdf5')), \
-                overwrite=True)
+        self.model.save_weights(os.sep.join((self.model_dir, 'model_weights.hdf5')), overwrite=True)
         # save preprocessor:
         with open(os.sep.join((self.model_dir, 'preprocessor.p')), 'wb') as f:
             pickle.dump(self.preprocessor, f)
@@ -495,9 +495,9 @@ class Tagger():
         if self.curr_nb_epochs and self.halve_lr_at:
             # update learning rate at specific points:
             if self.curr_nb_epochs % self.halve_lr_at == 0:
-                old_lr  = self.model.optimizer.lr.get_value()
+                old_lr = self.model.optimizer.lr.eval(session=K.get_session())
                 new_lr = np.float32(old_lr * 0.5)
-                self.model.optimizer.lr.set_value(new_lr)
+                self.model.optimizer.lr.assign(new_lr)
                 print('\t- Lowering learning rate > was:', old_lr, ', now:', new_lr)
 
         # get inputs and outputs straight:
