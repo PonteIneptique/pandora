@@ -1,0 +1,20 @@
++       all acc: 0.9288731999775872
++       kno acc: 0.9288731999775872
++       unk acc: 0.0
+::: Dev scores (lemmas) :::
++       all acc: 0.863198269079465
++       kno acc: 0.9221297056409054
++       unk acc: 0.5569774527726996
+::: Dev scores (lemmas) -> postcorrected :::
++       all acc: 0.8903422501966956
++       kno acc: 0.9392517884367304
++       unk acc: 0.6361974405850092
+::: Train scores (pos) :::
++       all acc: 0.9462094469658766
++       kno acc: 0.9462094469658766
++       unk acc: 0.0
+::: Dev scores (pos) :::
++       all acc: 0.9201416207710464
++       kno acc: 0.9326844142136742
++       unk acc: 0.8549664838513101
+

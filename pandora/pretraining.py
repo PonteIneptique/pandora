@@ -158,6 +158,7 @@ class Pretrainer:
         ax1.set_yticklabels([])
         ax1.set_yticks([])
         sns.plt.savefig(outputfile, bbox_inches=0)
+        sns.plt.close()
 
     def most_similar(self, nb_neighbors=5,
                      words=['doet', 'goet', 'ende', 'mach', 'gode'],
