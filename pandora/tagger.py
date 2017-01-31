@@ -29,8 +29,8 @@ from pandora.model import build_model
 from pandora.preprocessing import Preprocessor
 from pandora.pretraining import Pretrainer
 
-class Tagger():
 
+class Tagger():
     def __init__(self,
                  config_path=None,
                  nb_encoding_layers = 1,
@@ -58,6 +58,7 @@ class Tagger():
                  halve_lr_at = 10,
                  max_token_len = None,
                  min_lem_cnt = 1,
+                 overwrite=None
                  ):
         
         if load:
@@ -123,6 +124,11 @@ class Tagger():
             self.halve_lr_at = int(param_dict['halve_lr_at'])
             self.max_token_len = int(param_dict['max_token_len'])
             self.min_lem_cnt = int(param_dict['min_lem_cnt'])
+
+        if overwrite is not None:
+            # Overwrite should be a dict of attributes to change value of the trainer
+            for key, value in overwrite.items():
+                self.__setattr__(key, value)
         
         # create a models directory if it isn't there already:
         if not os.path.isdir(self.model_dir):

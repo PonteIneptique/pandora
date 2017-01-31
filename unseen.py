@@ -14,7 +14,7 @@ import argparse
 tokenize = re.compile("\s")
 
 
-def tag_dir(model, input_dir, output_dir, **kwargs):
+def tag_dir(model, input_dir, output_dir, string=None, **kwargs):
     """ Tag a directory of texts
 
     :param model: Path to a model file
@@ -22,9 +22,8 @@ def tag_dir(model, input_dir, output_dir, **kwargs):
     :param output_dir: Path to output tagged text files
     """
     print('::: started :::')
-    
-    tagger = Tagger(load=True, model_dir=model)
 
+    tagger = Tagger(load=True, model_dir=model, overwrite=kwargs)
     print('Tagger loaded, now annotating...')
 
     orig_path = input_dir
@@ -50,7 +49,7 @@ def tag_dir(model, input_dir, output_dir, **kwargs):
     print('::: ended :::')
 
 
-def tag_string(model, input_dir, **kwargs):
+def tag_string(model, input_dir, output_dir=None, string=None, **kwargs):
     """ Tag a directory of texts
 
     :param model: Path to a model file
@@ -59,7 +58,7 @@ def tag_string(model, input_dir, **kwargs):
 
     print('::: started :::')
 
-    tagger = Tagger(load=True, model_dir=model)
+    tagger = Tagger(load=True, model_dir=model, overwrite=kwargs)
 
     print('Tagger loaded, now annotating...')
 
@@ -67,9 +66,13 @@ def tag_string(model, input_dir, **kwargs):
     print(unseen_tokens)
 
     annotations = tagger.annotate(unseen_tokens)
-    for t, l, p in \
-            zip(annotations['tokens'], annotations['postcorrect_lemmas'], annotations['pos']):
-        print('\t'.join((t, l, p)))
+
+    keys = list(annotations.keys())
+    print("--------------------")
+    print('\t'.join(keys))
+    print("--------------------")
+    for x in zip(*tuple([annotations[k] for k in keys])):
+        print('\t'.join(list(x)))
 
     print('::: ended :::')
 
@@ -83,6 +86,13 @@ if __name__ == '__main__':
     )
     parser.add_argument("--input", dest="input_dir", help="Path of the input folder")
     parser.add_argument("--output", dest="output_dir", help="Path of the output folder")
+    parser.add_argument(
+        "--disable-post-correction",
+        dest="postcorrect",
+        help="Disable post correction",
+        action="store_false",
+        default=True
+    )
 
     args = parser.parse_args()
     if args.string:
