@@ -41,10 +41,11 @@ def tag_dir(model, input_dir, output_dir, string=None, **kwargs):
         )
 
         annotations = tagger.annotate(unseen_tokens)
+        keys = list(annotations.keys())
+        print("Keys :" + "\t".join(keys))
         with codecs.open(new_path + filename, 'w', 'utf8') as f:
-            for t, l, p in \
-                    zip(annotations['tokens'], annotations['postcorrect_lemmas'], annotations['postcorrect_pos']):
-                f.write('\t'.join((t, l, p))+'\n')
+            for x in zip(*tuple([annotations[k] for k in keys])):
+                f.write('\t'.join(list(x)))
     
     print('::: ended :::')
 
