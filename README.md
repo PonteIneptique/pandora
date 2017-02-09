@@ -8,24 +8,36 @@ A Tagger-Lemmatizer for Latin
 
 For now, installation needs to be done by pulling the repository and installing the required libraries yourself.
 
+#### Environment free
+
+*Note* : if you have CUDA installed, you should do `pip install -r requirements-gpu.txt` instead
+
+```bash
+git clone https://github.com/hipster-philology/pandora.git
+cd pandora
+pip install -r requirements.txt
+```
+
+#### Virtualenv
+
 **For CUDA-Ready machines owner**:
 
 ```bash
-git pull https://github.com/hipster-philology/pandora.git
+git clone https://github.com/hipster-philology/pandora.git
 cd pandora
 virtualenv env
 source env/bin/activate
-pip install -r requirements-gpu
+pip install -r requirements-gpu.txt
 ```
 
 **For the others**:
 
 ```bash
-git pull https://github.com/hipster-philology/pandora.git
+git clone https://github.com/hipster-philology/pandora.git
 cd pandora
 virtualenv env
 source env/bin/activate
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 ### Scripts
